@@ -1,7 +1,7 @@
 import Koa from 'koa'
 import koaBody from 'koa-body'
 
-import OpenApiBuilder from './openapi'
+import OpenApiBuilder from './OpenApiBuilder'
 import * as rest from './rest-endpoints'
 
 // app is not used, but is needed to declare ctx.request.body type for Typescript
