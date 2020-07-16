@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@koa/router": "^9.3.1",
+    "@types/dotenv": "^8.2.0",
     "@types/js-yaml": "^3.12.5",
     "@types/koa": "^2.11.3",
     "@types/koa-joi-router": "^5.2.3",
@@ -30,6 +31,7 @@
   ],
   "dependencies": {
     "deepmerge": "^4.2.2",
+    "dotenv": "^8.2.0",
     "joi-to-json-schema": "^5.1.0",
     "js-yaml": "^3.14.0",
     "koa-joi-router": "^6.0.2"

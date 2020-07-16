@@ -1,6 +1,7 @@
 import Koa from 'koa'
 import koaBody from 'koa-body'
 
+import Config from './Config'
 import OpenApiBuilder from './OpenApiBuilder'
 import * as rest from './rest-endpoints'
 
@@ -9,6 +10,7 @@ const app = new Koa()
 app.use(koaBody)
 
 export {
+  Config,
   OpenApiBuilder,
   rest
 }
