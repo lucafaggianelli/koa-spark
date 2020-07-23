@@ -1,7 +1,7 @@
 {
   "name": "koa-spark",
-  "version": "0.2.0",
-  "description": "Koa starter pack with TypeScript and TypeOrm",
+  "version": "0.2.1",
+  "description": "Koa utility pack",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Luca Faggianelli <luca.faggianelli@gmail.com>",
