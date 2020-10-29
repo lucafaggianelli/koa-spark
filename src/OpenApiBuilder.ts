@@ -90,11 +90,14 @@ export default class OpenApiBuilder {
       if (route.validate.params) {
         operation.parameters = Object.keys(route.validate.params).map(paramName => {
           try {
+            const { description, ...schema } = j2j(route.validate.params[paramName])
+
             return {
               name: paramName,
+              description,
               in: 'path',
               required: true,
-              schema: j2j(route.validate.params[paramName])
+              schema
             }
           } catch (e) {
             console.log('Error parsing params', route.method, route.path, route.validate.params[paramName])
@@ -190,6 +193,7 @@ export default class OpenApiBuilder {
     const mime = TYPE_TO_MIME[type] || 'text/plain'
 
     const schema = j2j(joiSchema)
+
     const description = schema.description || ''
 
     // Remove the `patterns: []` property from the schema
@@ -206,7 +210,6 @@ export default class OpenApiBuilder {
 
     delete schema.description
     delete schema.patterns
-
 
     content[mime] = { schema }
 
