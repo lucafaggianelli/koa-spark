@@ -191,6 +191,19 @@ export default class OpenApiBuilder {
 
     const schema = j2j(joiSchema)
     const description = schema.description || ''
+
+    // Remove the `patterns: []` property from the schema
+    if (schema.properties) {
+      for (const propertySchema of Object.values<any>(schema.properties)) {
+        if (propertySchema.items && propertySchema.items.patterns) {
+          // The property is an array, so definition is inside `items`
+          delete propertySchema.items.patterns
+        } else if (propertySchema.patterns) {
+          delete propertySchema.patterns
+        }
+      }
+    }
+
     delete schema.description
     delete schema.patterns
 
