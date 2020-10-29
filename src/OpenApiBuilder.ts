@@ -125,7 +125,7 @@ export default class OpenApiBuilder {
        *  /users/:id -> /users/{id}
        */
       const path = typeof route.path === 'string'
-        ? route.path.replace(/:(\w+)/, '{$1}')
+        ? route.path.replace(/:(\w+)/g, '{$1}')
         // TODO: warn the user that swagger doesn't accept regex as path
         : route.path.toString()
       paths[path] = pathObject
