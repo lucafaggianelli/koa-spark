@@ -1,6 +1,6 @@
 {
   "name": "koa-spark",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Koa utility pack",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
