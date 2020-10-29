@@ -73,6 +73,10 @@ export default class OpenApiBuilder {
         operation.description = route.meta.description
       }
 
+      if (route.meta && route.meta.tags) {
+        operation.tags = Array.isArray(route.meta.tags) ? route.meta.tags : [ route.meta.tags ]
+      }
+
       /**
        * Request Body
        */
