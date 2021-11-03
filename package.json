@@ -9,12 +9,11 @@
     "url": "https://github.com/lucafaggianelli/koa-spark"
   },
   "license": "MIT",
-  "type": "module",
   "source": "src/index.ts",
   "module": "./dist/index.module.js",
   "scripts": {
-    "build": "microbundle",
-    "dev": "microbundle watch",
+    "build": "microbundle --target=node",
+    "dev": "microbundle watch --target=node",
     "prepare": "npm run build"
   },
   "devDependencies": {
