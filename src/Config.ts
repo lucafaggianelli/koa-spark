@@ -77,11 +77,6 @@ export class AppConfig {
     this.loadEnvFile()
 
     this.initConfigFields()
-
-    /**
-     * Init *complex* default values that depends on other configs
-     */
-    this.origin = this.origin ?? `http://localhost:${this.port}`
   }
 
   private loadEnvFile () {
