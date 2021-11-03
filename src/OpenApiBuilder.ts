@@ -1,10 +1,10 @@
-import KoaRouter from '@koa/router'
 import deepmerge from 'deepmerge'
 import fs, { Stats } from 'fs'
 import { Router } from 'koa-joi-router'
 import j2j from 'joi-to-json-schema'
 import YAML from 'js-yaml'
 import path from 'path'
+import { combineMerge } from './utils'
 
 const SUPPORTED_EXTENSIONS = {
   '.json': 'json',
@@ -215,19 +215,4 @@ export default class OpenApiBuilder {
 
     return { content, description }
   }
-}
-
-const combineMerge = (target: any, source: any, options: any) => {
-  const destination = target.slice()
-
-  source.forEach((item: any, index: any) => {
-    if (typeof destination[index] === 'undefined') {
-      destination[index] = options.cloneUnlessOtherwiseSpecified(item, options)
-    } else if (options.isMergeableObject(item)) {
-      destination[index] = deepmerge(target[index], item, options)
-    } else if (target.indexOf(item) === -1) {
-      destination.push(item)
-    }
-  })
-  return destination
 }
