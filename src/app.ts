@@ -12,12 +12,13 @@ import path from 'path'
 import { AppConfig } from './Config'
 import { spaRewrite } from './middlewares'
 import { combineMerge } from './utils'
+import { KoaApp } from './types'
 
 type HelmetOptions = Parameters<typeof helmet>[0]
 
 export class SparkApp {
   config: AppConfig
-  nativeApp: Koa
+  nativeApp: KoaApp
   options: SparkOptions
   server: http.Server
 
