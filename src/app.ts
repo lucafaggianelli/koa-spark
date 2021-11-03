@@ -26,7 +26,7 @@ export class SparkApp {
 
   startServer () {
     this.server.listen(this.config.port, () => {
-      console.log(`Server running on port ${this.config.origin} (env: ${this.config.nodeEnv})`)
+      console.log(`Server running on port ${this.config.port}`)
     })
   }
 }

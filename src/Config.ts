@@ -86,6 +86,8 @@ export class AppConfig {
       ? envSpecificFile
       : path.join(cwd(), '.env')
 
+    console.log(`Loaded configuration file '${envFilePath}'`)
+
     dotenv.config({
       path: envFilePath
     })
@@ -105,6 +107,10 @@ export class AppConfig {
       )
 
       this[key] = value ?? (fieldOptions ? fieldOptions.default : undefined)
+
+      if (!this[key]) {
+        console.warn(`The configuration '${key.toString()}' is missing and it doesn't have a default value`)
+      }
     })
   }
 
