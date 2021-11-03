@@ -63,12 +63,14 @@ export const getResource = <T>(entity: { getRepository(): Repository<T> }) =>
 export const listResources = <T>(entity: { getRepository(): Repository<T> }) =>
   async function (ctx: ParameterizedContext) {
     const pageSize = 30
-    const page = ctx.query.page ?? 1
+    const page = !Array.isArray(ctx.query.page)
+      ? parseInt(ctx.query.page)
+      : 1
 
     ctx.assert(page >= 1, 400, 'page argument must be >= 1')
 
     let where = {}
-    if (ctx.query.where) {
+    if (ctx.query.where && !Array.isArray(ctx.query.where)) {
       try {
         where = JSON.parse(ctx.query.where)
       } catch (e) {
