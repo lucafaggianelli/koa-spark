@@ -5,12 +5,16 @@ import { cwd } from 'process'
 import dotenv from 'dotenv'
 import 'reflect-metadata'
 
+import { getChildLogger } from './logger'
+
 type ConfigFieldsMap = Map<string | symbol, FieldOptions>
 
 interface FieldOptions {
   default?: any
   type?: string
 }
+
+const logger = getChildLogger('Config')
 
 const FIELDS_METADATA_KEY = Symbol('fields')
 
@@ -86,7 +90,7 @@ export class AppConfig {
       ? envSpecificFile
       : path.join(cwd(), '.env')
 
-    console.log(`Loaded configuration file '${envFilePath}'`)
+    logger.info(`Loaded configuration file '${envFilePath}'`)
 
     dotenv.config({
       path: envFilePath
@@ -109,7 +113,7 @@ export class AppConfig {
       this[key] = value ?? (fieldOptions ? fieldOptions.default : undefined)
 
       if (!this[key]) {
-        console.warn(`The configuration '${key.toString()}' is missing and it doesn't have a default value`)
+        logger.warn(`The configuration '${key.toString()}' is missing and it doesn't have a default value`)
       }
     })
   }

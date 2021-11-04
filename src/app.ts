@@ -10,6 +10,7 @@ import helmet from 'koa-helmet'
 import path from 'path'
 
 import { AppConfig } from './Config'
+import { logger } from './logger'
 import { spaRewrite } from './middlewares'
 import { combineMerge } from './utils'
 import { KoaApp } from './types'
@@ -26,7 +27,7 @@ export class SparkApp {
 
   startServer () {
     this.server.listen(this.config.port, () => {
-      console.log(`Server running on port ${this.config.port}`)
+      logger.info(`Server running on port ${this.config.port}`)
     })
   }
 }

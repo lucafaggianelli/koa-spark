@@ -4,6 +4,8 @@ import { Router } from 'koa-joi-router'
 import j2j from 'joi-to-json-schema'
 import YAML from 'js-yaml'
 import path from 'path'
+
+import { getChildLogger } from './logger'
 import { combineMerge } from './utils'
 
 const SUPPORTED_EXTENSIONS = {
@@ -17,6 +19,8 @@ const TYPE_TO_MIME = {
   json: 'application/json',
   multipart: 'multipart/form-data'
 }
+
+const logger = getChildLogger('OpenAPI')
 
 export default class OpenApiBuilder {
   version: string
@@ -65,7 +69,7 @@ export default class OpenApiBuilder {
       const operation: any = {}
 
       if (!route.validate) {
-        console.warn('Route has no validation specs:', route.method, route.path)
+        logger.warn('Route has no validation specs:', route.method, route.path)
         continue
       }
 
@@ -100,8 +104,8 @@ export default class OpenApiBuilder {
               schema
             }
           } catch (e) {
-            console.log('Error parsing params', route.method, route.path, route.validate.params[paramName])
-            console.log(e.message)
+            logger.error('Error parsing params', route.method, route.path, route.validate.params[paramName])
+            logger.error(e.message)
           }
         })
       }
