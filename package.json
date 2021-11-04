@@ -1,7 +1,7 @@
 {
   "name": "koa-spark",
-  "version": "0.2.2",
-  "description": "Koa utility pack",
+  "version": "0.3.0",
+  "description": "Koa application boilerplate-less",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Luca Faggianelli <luca.faggianelli@gmail.com>",
@@ -14,7 +14,8 @@
   "scripts": {
     "build": "microbundle --target=node",
     "dev": "microbundle watch --target=node",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "publish": "npm publish"
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.0",
