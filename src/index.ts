@@ -1,6 +1,7 @@
 export * from './Config'
 export * from './OpenApiBuilder'
 export * from './app'
+export * from './logger'
 export * from './middlewares'
 export * from './rest-endpoints'
 export * from './types'
