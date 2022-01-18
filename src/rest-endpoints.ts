@@ -33,9 +33,7 @@ export const createResource = <T>(entity: { getRepository(): Repository<T> }) =>
  */
 export const getResource = <T>(entity: { getRepository(): Repository<T> }) =>
   async function (ctx: ParameterizedContext) {
-    const id: number | 'random' = parseInt(ctx.params.id) || ctx.params.id
-
-    ctx.assert(id > 0 || ctx.params.id === 'random', 400, 'Resource ID must be an integer > 0')
+    const { id } = ctx.params
 
     let resource: T
 
