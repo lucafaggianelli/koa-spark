@@ -1,8 +1,9 @@
 import { ParameterizedContext, Next } from 'koa'
 import { Repository, DeepPartial } from 'typeorm'
+import { QueryBuilder } from 'typeorm-express-query-builder'
 
 /**
- * Create a result and return it with the newly created ID
+ * Create a resource and return it with the newly created ID
  *
  * @param entity
  */
@@ -60,27 +61,9 @@ export const getResource = <T>(entity: { getRepository(): Repository<T> }) =>
  */
 export const listResources = <T>(entity: { getRepository(): Repository<T> }) =>
   async function (ctx: ParameterizedContext) {
-    const pageSize = 30
-    const page = !Array.isArray(ctx.query.page)
-      ? parseInt(ctx.query.page)
-      : 1
+    const findQuery = new QueryBuilder(ctx.query).build()
 
-    ctx.assert(page >= 1, 400, 'page argument must be >= 1')
-
-    let where = {}
-    if (ctx.query.where && !Array.isArray(ctx.query.where)) {
-      try {
-        where = JSON.parse(ctx.query.where)
-      } catch (e) {
-        ctx.throw(400, 'where query argument must be a valid JSON string')
-      }
-    }
-
-    ctx.body = await entity.getRepository().find({
-      where,
-      skip: (page - 1) * pageSize,
-      take: pageSize
-    })
+    ctx.body = await entity.getRepository().find(findQuery)
   }
 
 /**
@@ -90,12 +73,11 @@ export const listResources = <T>(entity: { getRepository(): Repository<T> }) =>
  */
 export const updateResource = <T>(entity: { getRepository(): Repository<T> }) =>
   async function (ctx: ParameterizedContext, next: Next) {
-    const id = parseInt(ctx.params.id)
-    ctx.assert(id > 0, 400, 'Resource ID must be an integer > 0')
+    const { id } = ctx.params
 
     try {
-      const toSave = entity.getRepository().create({ id, ...ctx.request.body })
-      await entity.getRepository().save(toSave)
+      const toSave = entity.getRepository().create(ctx.request.body as DeepPartial<T>)
+      await entity.getRepository().update(id, toSave)
 
       ctx.status = 204
     } catch (e) {
