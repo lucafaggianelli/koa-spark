@@ -51,6 +51,7 @@
     "koa-static": "^5.0.0",
     "pino": "^7.1.0",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.2.25"
+    "typeorm": "^0.2.41",
+    "typeorm-express-query-builder": "^1.5.1"
   }
 }
