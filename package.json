@@ -1,6 +1,6 @@
 {
   "name": "koa-spark",
-  "version": "0.3.0",
+  "version": "0.4.1",
   "description": "Koa application boilerplate-less",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -51,7 +51,9 @@
     "koa-static": "^5.0.0",
     "pino": "^7.1.0",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.2.41",
     "typeorm-express-query-builder": "^1.5.1"
+  },
+  "peerDependencies": {
+    "typeorm": "^0.2.41"
   }
 }
