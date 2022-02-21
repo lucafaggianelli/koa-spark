@@ -45,6 +45,11 @@ export interface SparkOptions {
   helmet?: HelmetOptions
 
   /**
+   * If defined, Koa will serve static files from this folder
+   */
+  staticFolder?: string
+
+  /**
    * Use session
    */
   useSession?: boolean
@@ -99,14 +104,10 @@ export const createApp = (config: AppConfig = new AppConfig(), options?: SparkOp
     app.nativeApp.use(spaRewrite())
   }
 
-  /**
-   * Serve static files from public/ folder. The folder structure is:
-   *
-   * /backend/dist/
-   * -- src/
-   * -- public/ (contains static files)
-   */
-   app.nativeApp.use(koaStatic(path.resolve(__dirname, '..', 'public')))
+  // Serve static files
+  if (app.options.staticFolder) {
+    app.nativeApp.use(koaStatic(app.options.staticFolder))
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   app.server = http.createServer(app.nativeApp.callback())
