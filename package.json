@@ -1,6 +1,6 @@
 {
   "name": "koa-spark",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Koa application boilerplate-less",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
