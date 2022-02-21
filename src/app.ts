@@ -78,7 +78,7 @@ export const createApp = (config: AppConfig = new AppConfig(), options?: SparkOp
 
   app.nativeApp = new Koa()
   app.config = config
-  app.options = deepmerge(options, getDefaultOptions(app.config), { arrayMerge: combineMerge })
+  app.options = deepmerge(getDefaultOptions(app.config), options, { arrayMerge: combineMerge })
 
   // Koa logger must be registered at the beginning to catch all requests
   if (app.config.isDevelopment) {
